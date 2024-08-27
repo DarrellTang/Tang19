@@ -1,0 +1,21 @@
+points:
+  zones:
+    tags:
+      is_key: true
+      key_1u: true
+      key_15u: false
+    macropad: # A unique key for each zone which will be used to refer to it
+      columns: 
+        pinky:
+        ring:
+        middle:
+        index:
+        index_plus:
+          rows:
+            four:
+              skip: true
+      rows:
+        one:
+        two:
+        three:
+        four:
