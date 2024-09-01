@@ -14,26 +14,28 @@ units:
 points:
   zones:
     ffxiv:
+      anchor:
+        shift: [150, -150]
       columns: 
-        pinky:
-        ring:
-        middle:
-        index:
+        col1:
+        col2:
+        col3:
+        col4:
           rows:
-            space:
+            row1:
               skip: true
-        indexplus:
+        col5:
           rows:
-            space:
+            row1:
               width: 2kx
               shift: [-kx/2,0]
-            lower:
+            row2:
               shift: [kx/2,0]
       rows:
-        space:
-        lower:
-        home:
-        top:
+        row1:
+        row2:
+        row3:
+        row4:
 outlines:
   raw:
     - what: rectangle
@@ -48,16 +50,40 @@ outlines:
     - what: polygon
       operation: stack
       points:
-      - ref: ffxiv_pinky_top
+      - ref: ffxiv_col1_row4
         shift: [-.5px,.5py]
-      - ref: ffxiv_indexplus_top
+      - ref: ffxiv_col5_row4
         shift: [.5px,.5py]
-      - ref: ffxiv_indexplus_space
+      - ref: ffxiv_col5_row1
         shift: [px-2,-.5py]
-      - ref: ffxiv_pinky_space
+      - ref: ffxiv_col1_row1
         shift: [-.5px,-.5py]
       fillet: 2
   pcb-and-keys:
     - name: pcb
     - operation: subtract
       name: keys
+pcbs:
+  ffxiv:
+    template: kicad8
+    outlines:
+      main:
+        outline: pcb
+    footprints:
+      mx-hotswap:
+        what: mx
+        where: true
+        params:
+          keycaps: true
+          reverse: false
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
