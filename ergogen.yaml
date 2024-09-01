@@ -1,21 +1,63 @@
+metadata:
+  engine: 4.1.0
+  version: 0.0.1
+  author: "Darrell Tang"
+units:
+  # Proxy Spacing Variables
+  kx: U
+  ky: U
+  # Padding Variables
+  px: kx + 4
+  py: ky + 4
+  $default_width: U
+  $default_height: U
 points:
   zones:
-    tags:
-      is_key: true
-      key_1u: true
-      key_15u: false
-    macropad: # A unique key for each zone which will be used to refer to it
+    ffxiv:
       columns: 
         pinky:
         ring:
         middle:
         index:
-        index_plus:
           rows:
-            four:
+            space:
               skip: true
+        indexplus:
+          rows:
+            space:
+              width: 2kx
+              shift: [-kx/2,0]
+            lower:
+              shift: [kx/2,0]
       rows:
-        one:
-        two:
-        three:
-        four:
+        space:
+        lower:
+        home:
+        top:
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [kx, ky]
+  keys:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [kx-0.5,ky-0.5]
+  pcb:
+    - what: polygon
+      operation: stack
+      points:
+      - ref: ffxiv_pinky_top
+        shift: [-.5px,.5py]
+      - ref: ffxiv_indexplus_top
+        shift: [.5px,.5py]
+      - ref: ffxiv_indexplus_space
+        shift: [px-2,-.5py]
+      - ref: ffxiv_pinky_space
+        shift: [-.5px,-.5py]
+      fillet: 2
+  pcb-and-keys:
+    - name: pcb
+    - operation: subtract
+      name: keys
